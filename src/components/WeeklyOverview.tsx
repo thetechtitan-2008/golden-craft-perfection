@@ -22,8 +22,8 @@ export function WeeklyOverview() {
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           kicker="The Microcycle"
-          title="Seven Days · One Symphony"
-          description="A 6:1 architecture. Six days of extreme mechanical exposure feed one day of parasympathetic supercompensation. Every session is a distinct movement in the whole."
+          title="Discipline Becomes Legacy"
+          description="A 6:1 architecture. Six days beneath the iron feed one day of parasympathetic restoration. Every session, a distinct movement in a single, uncompromising symphony."
         />
 
         <div className="mt-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [
   { id: "protocol", label: "Protocol", href: "/#protocol" },
@@ -47,6 +48,8 @@ export function FloatingNav() {
             {l.label}
           </a>
         ))}
+        <div className="h-4 w-px bg-gold-bright/20 mx-1" />
+        <ThemeToggle />
       </nav>
     </header>
   );

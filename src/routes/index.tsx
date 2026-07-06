@@ -50,18 +50,18 @@ function Home() {
             <div className="flex items-center justify-center gap-4 mb-8">
               <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
               <span className="text-[10px] tracking-[0.5em] uppercase text-gold-bright/70">
-                Architectural Synthesis
+                The Architecture of Greatness
               </span>
               <span className="w-12 h-px bg-gradient-to-l from-transparent to-gold-bright/60" />
             </div>
-            <p className="font-serif italic text-2xl md:text-3xl leading-relaxed text-foreground/85">
+            <p className="font-serif italic text-2xl md:text-3xl leading-[1.55] text-foreground/85">
               {PROTOCOL_SYNTHESIS}
             </p>
             <div className="mt-16 grid grid-cols-3 divide-x divide-gold/15 border-y border-gold/15">
               {[
-                { n: "06", l: "Mechanical Days" },
-                { n: "01", l: "Parasympathetic" },
-                { n: "07", l: "Day Microcycle" },
+                { n: "06", l: "Days Under Iron" },
+                { n: "01", l: "Day of Restoration" },
+                { n: "07", l: "The Complete Cycle" },
               ].map((s) => (
                 <div key={s.l} className="py-8">
                   <div className="font-display text-4xl md:text-5xl gold-gradient-text">
@@ -88,11 +88,11 @@ function Home() {
                   Chronograph · Manufacture
                 </span>
               </div>
-              <h2 className="font-display text-4xl md:text-6xl gold-gradient-text leading-tight">
-                Time · Measured with Reverence
+              <h2 className="font-display gold-gradient-text leading-[1.02]">
+                Every Second, Earned
               </h2>
-              <p className="mt-6 text-foreground/70 leading-relaxed">
-                Skeleton chronometer with visible tourbillon, oscillating balance
+              <p className="mt-6 text-foreground/70 leading-[1.85]">
+                A skeleton chronometer with visible tourbillon, oscillating balance
                 wheel, and mechanical rotor. Engage the pushers to time your
                 sets — every millisecond mechanical, every hand hand-finished in
                 the digital atelier.
