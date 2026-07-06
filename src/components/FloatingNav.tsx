@@ -106,11 +106,11 @@ export function FloatingNav() {
           className="absolute inset-0 bg-background/70 backdrop-blur-md"
         />
         <div
-          className={`absolute top-20 left-4 right-4 glass-panel rounded-3xl p-5 flex flex-col gap-1 transition-all duration-500 ${
+          className={`absolute top-24 left-4 right-4 glass-panel rounded-3xl p-6 flex flex-col gap-1 transition-all duration-500 ${
             open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
           }`}
         >
-          <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/60 px-3 pb-2">
+          <div className="text-[10px] tracking-[0.45em] uppercase text-gold-bright/70 px-3 pb-3">
             Navigate
           </div>
           {LINKS.map((l) => (
@@ -118,7 +118,7 @@ export function FloatingNav() {
               key={l.id}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="px-3 py-3 text-[12px] tracking-[0.32em] uppercase text-foreground/85 hover:text-gold-bright hover:bg-foreground/5 rounded-xl transition-colors"
+              className="px-4 py-4 text-[13px] tracking-[0.3em] uppercase text-foreground/90 hover:text-gold-bright hover:bg-gold/10 rounded-xl transition-colors border border-transparent hover:border-gold/20"
             >
               {l.label}
             </a>
