@@ -92,41 +92,43 @@
    NOT inverted. Each token individually tuned.
    ============================================================ */
 .light {
-  --obsidian: oklch(0.28 0.02 70);
-  --onyx: oklch(0.96 0.008 85);
-  --graphite: oklch(0.88 0.012 80);
+  /* Handcrafted: warm marble, ivory, deep champagne bronze.
+     Higher contrast on foreground; richer gold for legibility. */
+  --obsidian: oklch(0.22 0.025 65);
+  --onyx: oklch(0.965 0.010 85);
+  --graphite: oklch(0.90 0.014 80);
 
-  --gold: oklch(0.66 0.13 78);
-  --gold-bright: oklch(0.58 0.14 74);
-  --gold-highlight: oklch(0.78 0.13 82);
-  --gold-shadow: oklch(0.38 0.10 70);
+  --gold: oklch(0.56 0.14 68);         /* deep champagne bronze */
+  --gold-bright: oklch(0.48 0.15 62);  /* darker for text legibility on ivory */
+  --gold-highlight: oklch(0.72 0.14 76);
+  --gold-shadow: oklch(0.32 0.10 60);
 
-  --background: oklch(0.985 0.006 88);       /* warm ivory */
-  --foreground: oklch(0.22 0.02 70);         /* soft charcoal */
-  --card: oklch(0.995 0.004 88);
-  --card-foreground: oklch(0.22 0.02 70);
-  --popover: oklch(0.995 0.004 88);
-  --popover-foreground: oklch(0.22 0.02 70);
+  --background: oklch(0.975 0.010 86);        /* soft ivory */
+  --foreground: oklch(0.16 0.020 65);         /* rich charcoal */
+  --card: oklch(0.99 0.006 86);
+  --card-foreground: oklch(0.16 0.020 65);
+  --popover: oklch(0.995 0.004 86);
+  --popover-foreground: oklch(0.16 0.020 65);
   --primary: var(--gold-bright);
-  --primary-foreground: oklch(0.98 0.006 88);
-  --secondary: oklch(0.93 0.01 80);
-  --secondary-foreground: oklch(0.28 0.02 70);
-  --muted: oklch(0.94 0.008 82);
-  --muted-foreground: oklch(0.44 0.03 70);
-  --accent: oklch(0.92 0.03 80);
-  --accent-foreground: oklch(0.30 0.09 72);
-  --destructive: oklch(0.55 0.22 25);
+  --primary-foreground: oklch(0.98 0.008 86);
+  --secondary: oklch(0.92 0.012 80);
+  --secondary-foreground: oklch(0.22 0.02 65);
+  --muted: oklch(0.935 0.010 82);
+  --muted-foreground: oklch(0.38 0.03 65);
+  --accent: oklch(0.90 0.035 76);
+  --accent-foreground: oklch(0.26 0.10 62);
+  --destructive: oklch(0.52 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 25);
-  --border: oklch(0.55 0.08 78 / 0.22);
-  --input: oklch(0.55 0.08 78 / 0.28);
+  --border: oklch(0.45 0.09 68 / 0.28);
+  --input: oklch(0.45 0.09 68 / 0.32);
   --ring: var(--gold-bright);
 
-  --html-bg: oklch(0.985 0.006 88);
+  --html-bg: oklch(0.975 0.010 86);
   --ambient-vignette:
-    radial-gradient(120% 80% at 50% 0%, oklch(0.85 0.06 82 / 0.35), transparent 60%),
-    radial-gradient(80% 60% at 50% 100%, oklch(0.72 0.05 78 / 0.2), transparent 60%);
+    radial-gradient(120% 80% at 50% 0%, oklch(0.82 0.07 78 / 0.42), transparent 60%),
+    radial-gradient(90% 60% at 50% 100%, oklch(0.68 0.06 68 / 0.22), transparent 62%);
   --grain-blend: multiply;
-  --grain-opacity: 0.04;
+  --grain-opacity: 0.05;
 }
 
 @layer base {
