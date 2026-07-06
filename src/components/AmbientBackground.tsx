@@ -73,16 +73,8 @@ export function AmbientBackground() {
   return (
     <>
       <div
-        className="fixed inset-0 pointer-events-none z-0"
+        className="fixed inset-0 pointer-events-none z-0 ambient-orbs"
         aria-hidden
-        style={{
-          background: `
-            radial-gradient(60% 40% at 20% 10%, oklch(0.14 0.03 82 / 0.35), transparent 60%),
-            radial-gradient(50% 40% at 80% 90%, oklch(0.12 0.025 60 / 0.45), transparent 60%),
-            radial-gradient(70% 50% at 50% 50%, oklch(0.06 0.008 60 / 0.4), transparent 70%),
-            linear-gradient(180deg, #050505 0%, #040404 100%)
-          `,
-        }}
       />
       <canvas
         ref={canvasRef}

@@ -47,14 +47,18 @@ function Home() {
         {/* Protocol synthesis */}
         <section id="protocol" className="relative py-32 px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="flex items-center justify-center gap-4 mb-8" data-reveal>
               <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
               <span className="text-[10px] tracking-[0.5em] uppercase text-gold-bright/70">
                 The Architecture of Greatness
               </span>
               <span className="w-12 h-px bg-gradient-to-l from-transparent to-gold-bright/60" />
             </div>
-            <p className="font-serif italic text-2xl md:text-3xl leading-[1.55] text-foreground/85">
+            <p
+              className="font-serif italic text-2xl md:text-3xl leading-[1.55] text-foreground/85"
+              data-reveal
+              data-reveal-delay="120ms"
+            >
               {PROTOCOL_SYNTHESIS}
             </p>
             <div className="mt-16 grid grid-cols-3 divide-x divide-gold/15 border-y border-gold/15">
@@ -62,8 +66,13 @@ function Home() {
                 { n: "06", l: "Days Under Iron" },
                 { n: "01", l: "Day of Restoration" },
                 { n: "07", l: "The Complete Cycle" },
-              ].map((s) => (
-                <div key={s.l} className="py-8">
+              ].map((s, i) => (
+                <div
+                  key={s.l}
+                  className="py-8"
+                  data-reveal
+                  data-reveal-delay={`${200 + i * 140}ms`}
+                >
                   <div className="font-display text-4xl md:text-5xl gold-gradient-text">
                     {s.n}
                   </div>
@@ -82,16 +91,24 @@ function Home() {
         <section id="chronograph" className="relative py-32 px-6">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6" data-reveal>
                 <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
                 <span className="text-[10px] tracking-[0.5em] uppercase text-gold-bright/70">
                   Chronograph · Manufacture
                 </span>
               </div>
-              <h2 className="font-display gold-gradient-text leading-[1.02]">
+              <h2
+                className="font-display gold-gradient-text leading-[1.02]"
+                data-reveal
+                data-reveal-delay="120ms"
+              >
                 Every Second, Earned
               </h2>
-              <p className="mt-6 text-foreground/70 leading-[1.85]">
+              <p
+                className="mt-6 text-foreground/70 leading-[1.85]"
+                data-reveal
+                data-reveal-delay="240ms"
+              >
                 A skeleton chronometer with visible tourbillon, oscillating balance
                 wheel, and mechanical rotor. Engage the pushers to time your
                 sets — every millisecond mechanical, every hand hand-finished in
@@ -103,15 +120,22 @@ function Home() {
                   "Skeleton bridges revealing the escapement",
                   "Ruby jewels · heat-blued screws · Geneva stripes",
                   "Sweeping chronograph seconds hand",
-                ].map((f) => (
-                  <li key={f} className="flex items-center gap-3">
+                ].map((f, i) => (
+                  <li
+                    key={f}
+                    className="flex items-center gap-3"
+                    data-reveal
+                    data-reveal-delay={`${300 + i * 100}ms`}
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-bright" />
                     {f}
                   </li>
                 ))}
               </ul>
             </div>
-            <WatchChronograph />
+            <div data-reveal data-reveal-delay="200ms">
+              <WatchChronograph />
+            </div>
           </div>
         </section>
 

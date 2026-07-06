@@ -92,44 +92,70 @@
    NOT inverted. Each token individually tuned.
    ============================================================ */
 .light {
-  /* Legendary light: warm parchment + deep bronze gold + cognac accents.
-     Higher contrast on foreground; jewelry-grade metallic hierarchy. */
-  --obsidian: oklch(0.24 0.028 65);
+  /* Legendary light: warm parchment + deep bronze gold + espresso ink.
+     Extra-dark foreground so opacity-modulated text stays legible. */
+  --obsidian: oklch(0.20 0.028 62);
   --onyx: oklch(0.955 0.014 84);
   --graphite: oklch(0.88 0.018 78);
 
-  --gold: oklch(0.52 0.15 62);           /* burnished bronze */
-  --gold-bright: oklch(0.44 0.16 55);    /* deep cognac — legible on cream */
-  --gold-highlight: oklch(0.68 0.16 72); /* rose-gold shimmer */
-  --gold-shadow: oklch(0.28 0.11 52);    /* rich walnut */
+  --gold: oklch(0.44 0.16 58);            /* rich burnished bronze */
+  --gold-bright: oklch(0.36 0.17 52);     /* deep cognac — WCAG AA on cream */
+  --gold-highlight: oklch(0.58 0.17 66);
+  --gold-shadow: oklch(0.24 0.11 48);
 
-  --background: oklch(0.968 0.014 84);        /* warm parchment cream */
-  --foreground: oklch(0.14 0.022 62);         /* espresso, near-black */
+  --background: oklch(0.965 0.014 84);       /* warm parchment */
+  --foreground: oklch(0.11 0.024 62);        /* near-black espresso */
   --card: oklch(0.988 0.010 84);
-  --card-foreground: oklch(0.14 0.022 62);
+  --card-foreground: oklch(0.11 0.024 62);
   --popover: oklch(0.995 0.006 84);
-  --popover-foreground: oklch(0.14 0.022 62);
+  --popover-foreground: oklch(0.11 0.024 62);
   --primary: var(--gold-bright);
   --primary-foreground: oklch(0.985 0.010 84);
   --secondary: oklch(0.91 0.014 78);
-  --secondary-foreground: oklch(0.20 0.02 62);
+  --secondary-foreground: oklch(0.16 0.02 62);
   --muted: oklch(0.925 0.012 82);
-  --muted-foreground: oklch(0.34 0.03 62);
-  --accent: oklch(0.89 0.038 72);
-  --accent-foreground: oklch(0.24 0.11 58);
-  --destructive: oklch(0.50 0.22 25);
+  --muted-foreground: oklch(0.26 0.03 62);
+  --accent: oklch(0.88 0.040 72);
+  --accent-foreground: oklch(0.20 0.11 56);
+  --destructive: oklch(0.48 0.22 25);
   --destructive-foreground: oklch(0.98 0.01 25);
-  --border: oklch(0.42 0.10 60 / 0.30);
-  --input: oklch(0.42 0.10 60 / 0.34);
+  --border: oklch(0.36 0.10 58 / 0.34);
+  --input: oklch(0.36 0.10 58 / 0.38);
   --ring: var(--gold-bright);
 
-  --html-bg: oklch(0.968 0.014 84);
+  --html-bg: oklch(0.965 0.014 84);
   --ambient-vignette:
-    radial-gradient(120% 80% at 50% 0%, oklch(0.80 0.08 74 / 0.48), transparent 62%),
-    radial-gradient(90% 60% at 50% 100%, oklch(0.62 0.08 58 / 0.28), transparent 64%),
-    radial-gradient(50% 50% at 15% 40%, oklch(0.86 0.06 82 / 0.35), transparent 70%);
+    radial-gradient(120% 80% at 50% -5%, oklch(0.98 0.03 82 / 0.55), transparent 65%),
+    radial-gradient(90% 60% at 50% 105%, oklch(0.90 0.05 60 / 0.35), transparent 68%),
+    radial-gradient(50% 50% at 90% 30%, oklch(0.95 0.04 78 / 0.28), transparent 75%);
   --grain-blend: multiply;
-  --grain-opacity: 0.045;
+  --grain-opacity: 0.035;
+}
+
+/* Light-mode contrast lift — opacity-modulated muted text stays legible.
+   Any element whose class ends in /40, /50, /60, /70 for foreground or
+   gold-bright gets a floor via extra weight + text-shadow. */
+.light .text-foreground\/40,
+.light .text-foreground\/50,
+.light .text-foreground\/60,
+.light .text-foreground\/70,
+.light .text-foreground\/80,
+.light .text-foreground\/85 {
+  color: color-mix(in oklab, var(--foreground) 92%, transparent) !important;
+  font-weight: 450;
+}
+.light .text-gold-bright\/50,
+.light .text-gold-bright\/60,
+.light .text-gold-bright\/70,
+.light .text-gold-bright\/80,
+.light .text-gold-bright\/85,
+.light .text-gold-bright\/90 {
+  color: var(--gold-bright) !important;
+  font-weight: 500;
+}
+.light .gold-shimmer,
+.light .gold-gradient-text {
+  filter: contrast(1.08) saturate(1.15);
 }
 
 @layer base {
@@ -357,6 +383,25 @@
   background: var(--ambient-vignette);
   transition: background 0.6s ease;
 }
+.ambient-orbs {
+  background:
+    radial-gradient(60% 40% at 20% 10%, color-mix(in oklch, var(--gold) 18%, transparent), transparent 60%),
+    radial-gradient(50% 40% at 80% 90%, color-mix(in oklch, var(--gold-shadow) 26%, transparent), transparent 60%),
+    radial-gradient(70% 50% at 50% 50%, color-mix(in oklch, var(--background) 60%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--background) 0%, color-mix(in oklch, var(--background) 92%, black) 100%);
+  transition: background 0.6s ease;
+}
+.light .ambient-orbs {
+  background:
+    radial-gradient(60% 45% at 15% 5%, color-mix(in oklch, var(--gold-highlight) 22%, transparent), transparent 65%),
+    radial-gradient(55% 45% at 85% 95%, color-mix(in oklch, var(--gold) 12%, transparent), transparent 66%),
+    radial-gradient(80% 55% at 50% 50%, color-mix(in oklch, var(--background) 40%, white), transparent 72%),
+    linear-gradient(180deg, oklch(0.985 0.010 84) 0%, oklch(0.945 0.018 82) 100%);
+}
+
+
+
+
 
 .god-rays {
   background: conic-gradient(from 90deg at 50% -10%,

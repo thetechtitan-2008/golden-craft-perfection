@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ThemeToggle } from "./ThemeToggle";
+import { SoundToggle } from "./SoundToggle";
 
 const LINKS = [
   { id: "protocol", label: "Protocol", href: "/#protocol" },
@@ -87,7 +88,9 @@ export function FloatingNav() {
           visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <div className="glass-nav rounded-full p-1 flex items-center">
+        <div className="glass-nav rounded-full p-1 flex items-center gap-0.5">
+          <SoundToggle />
+          <span className="w-px h-4 bg-gold-bright/20" />
           <ThemeToggle />
         </div>
       </div>
