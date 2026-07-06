@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 export type ExerciseLog = {
   completed?: boolean;
   weight?: string;
+  bestWeight?: string;
   notes?: string;
   updatedAt?: string;
 };
