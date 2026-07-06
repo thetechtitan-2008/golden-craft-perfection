@@ -43,20 +43,21 @@ export function Hero() {
         </p>
 
         <h1
-          className="font-display font-normal text-[13vw] sm:text-[10vw] md:text-[7.5vw] lg:text-[6.5rem] leading-[0.95] tracking-[0.01em] rise"
+          className="font-display font-normal leading-[0.95] tracking-[0.005em] rise"
           style={{ animationDelay: "0.6s" }}
         >
-          <span className="gold-gradient-text block">Forged in</span>
-          <span className="gold-shimmer block italic font-serif">Discipline</span>
+          <span className="gold-gradient-text block">Forged Beyond</span>
+          <span className="gold-shimmer block italic font-serif">Limits</span>
         </h1>
 
         <p
-          className="mt-8 max-w-xl text-sm md:text-base text-foreground/70 leading-relaxed rise"
+          className="mt-10 max-w-xl text-sm md:text-base text-foreground/70 leading-[1.85] rise"
           style={{ animationDelay: "0.85s" }}
         >
-          A biomechanical masterclass. Six days of extreme mechanical exposure,
-          one day of parasympathetic supercompensation. Every rep, every tempo,
-          every rest interval — mathematically precise.
+          A protocol for those who refuse average. Six days of exacting mechanical
+          exposure, one day of parasympathetic supercompensation — every rep,
+          every tempo, every interval measured with the reverence of a
+          Swiss chronometer.
         </p>
 
         <div
