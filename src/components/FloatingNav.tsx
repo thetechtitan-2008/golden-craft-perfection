@@ -56,10 +56,10 @@ export function FloatingNav() {
         </nav>
 
         {/* Mobile: compact pill (emblem + hamburger) */}
-        <nav className="md:hidden glass-nav rounded-full pl-4 pr-2 py-2 flex items-center gap-2">
+        <nav className="md:hidden glass-nav rounded-full pl-4 pr-1.5 py-1.5 flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="Home">
-            <EmblemMark className="w-5 h-5 text-gold-bright" />
-            <span className="font-display text-[10px] tracking-[0.35em] uppercase text-gold-bright/90">
+            <EmblemMark className="w-6 h-6 text-gold-bright" />
+            <span className="font-display text-[11px] tracking-[0.32em] uppercase text-gold-bright/95">
               S·K·P
             </span>
           </Link>
@@ -68,13 +68,13 @@ export function FloatingNav() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="ml-1 w-9 h-9 rounded-full flex items-center justify-center text-gold-bright/85 hover:text-gold-bright active:scale-95 transition-transform"
+            className="ml-1 w-11 h-11 rounded-full flex items-center justify-center text-gold-bright/90 hover:text-gold-bright active:scale-95 transition-transform bg-gold/5"
           >
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
               {open ? (
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               ) : (
-                <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               )}
             </svg>
           </button>
@@ -106,11 +106,11 @@ export function FloatingNav() {
           className="absolute inset-0 bg-background/70 backdrop-blur-md"
         />
         <div
-          className={`absolute top-20 left-4 right-4 glass-panel rounded-3xl p-5 flex flex-col gap-1 transition-all duration-500 ${
+          className={`absolute top-24 left-4 right-4 glass-panel rounded-3xl p-6 flex flex-col gap-1 transition-all duration-500 ${
             open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
           }`}
         >
-          <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/60 px-3 pb-2">
+          <div className="text-[10px] tracking-[0.45em] uppercase text-gold-bright/70 px-3 pb-3">
             Navigate
           </div>
           {LINKS.map((l) => (
@@ -118,7 +118,7 @@ export function FloatingNav() {
               key={l.id}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="px-3 py-3 text-[12px] tracking-[0.32em] uppercase text-foreground/85 hover:text-gold-bright hover:bg-foreground/5 rounded-xl transition-colors"
+              className="px-4 py-4 text-[13px] tracking-[0.3em] uppercase text-foreground/90 hover:text-gold-bright hover:bg-gold/10 rounded-xl transition-colors border border-transparent hover:border-gold/20"
             >
               {l.label}
             </a>
