@@ -148,6 +148,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ScrollProgress />
       <CustomCursor />
+      <GlobalSound />
+      <AutoReveal />
       <Outlet />
       <BackToTop />
     </QueryClientProvider>
