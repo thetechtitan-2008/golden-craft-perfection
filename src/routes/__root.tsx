@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { CustomCursor } from "@/components/CustomCursor";
+import { GlobalSound } from "@/components/GlobalSound";
+import { AutoReveal } from "@/components/AutoReveal";
 
 function NotFoundComponent() {
   return (
