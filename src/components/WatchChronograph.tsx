@@ -292,13 +292,43 @@ export function WatchChronograph() {
           SKELETON · MANUFACTURE
         </text>
 
-        {/* Case crown & pushers (visual, real interaction below) */}
-        <rect x="583" y="240" width="16" height="24" rx="2" fill="url(#bezel)" />
-        <rect x="583" y="290" width="20" height="20" rx="3" fill="url(#bezel)" />
-        <rect x="583" y="336" width="16" height="24" rx="2" fill="url(#bezel)" />
+        {/* Case crown & pushers — integrated into the case at 2/3/4 o'clock */}
+        <g>
+          {/* Upper pusher (2 o'clock) */}
+          <g transform="translate(541 156)">
+            <rect x="-6" y="-3" width="12" height="6" rx="1.5" fill="#0a0805" />
+            <rect x="-4" y="-9" width="8" height="8" rx="1.6" fill="url(#bezel)" stroke="#3a2810" strokeWidth="0.4" />
+            <line x1="-3" y1="-5" x2="3" y2="-5" stroke="#3a2810" strokeWidth="0.4" opacity="0.6" />
+          </g>
+          {/* Signed crown (3 o'clock) — screwed, fluted */}
+          <g transform="translate(578 300)">
+            <rect x="-8" y="-4" width="10" height="8" rx="1.2" fill="#0a0805" />
+            <ellipse cx="4" cy="0" rx="9" ry="11" fill="url(#bezel)" stroke="#3a2810" strokeWidth="0.5" />
+            {Array.from({ length: 10 }).map((_, i) => {
+              const a = (i / 10) * Math.PI * 2;
+              return (
+                <line
+                  key={i}
+                  x1={4 + Math.cos(a) * 6} y1={Math.sin(a) * 8}
+                  x2={4 + Math.cos(a) * 8.5} y2={Math.sin(a) * 10.5}
+                  stroke="#3a2810" strokeWidth="0.6"
+                />
+              );
+            })}
+            <circle cx="4" cy="0" r="3.5" fill="none" stroke="#3a2810" strokeWidth="0.4" />
+            <text x="4" y="1.6" fontFamily="'Cinzel', serif" fontSize="4" fill="#3a2810" textAnchor="middle" opacity="0.9">S</text>
+          </g>
+          {/* Lower pusher (4 o'clock) */}
+          <g transform="translate(541 444)">
+            <rect x="-6" y="-3" width="12" height="6" rx="1.5" fill="#0a0805" />
+            <rect x="-4" y="1" width="8" height="8" rx="1.6" fill="url(#bezel)" stroke="#3a2810" strokeWidth="0.4" />
+            <line x1="-3" y1="5" x2="3" y2="5" stroke="#3a2810" strokeWidth="0.4" opacity="0.6" />
+          </g>
+        </g>
 
         {/* sapphire reflection */}
         <ellipse cx="230" cy="180" rx="130" ry="60" fill="white" opacity="0.03" />
+        <ellipse cx="380" cy="440" rx="70" ry="26" fill="white" opacity="0.02" />
       </svg>
 
       {/* Precision pushers */}
