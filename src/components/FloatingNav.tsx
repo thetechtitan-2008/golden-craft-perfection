@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ThemeToggle } from "./ThemeToggle";
+import { SoundToggle } from "./SoundToggle";
 
 const LINKS = [
   { id: "protocol", label: "Protocol", href: "/#protocol" },
