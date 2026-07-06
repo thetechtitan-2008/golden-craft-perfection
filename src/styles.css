@@ -125,11 +125,11 @@
 
   --html-bg: oklch(0.965 0.014 84);
   --ambient-vignette:
-    radial-gradient(120% 80% at 50% 0%, oklch(0.80 0.08 74 / 0.50), transparent 62%),
-    radial-gradient(90% 60% at 50% 100%, oklch(0.58 0.09 56 / 0.32), transparent 64%),
-    radial-gradient(50% 50% at 15% 40%, oklch(0.86 0.06 82 / 0.35), transparent 70%);
+    radial-gradient(120% 80% at 50% -5%, oklch(0.98 0.03 82 / 0.55), transparent 65%),
+    radial-gradient(90% 60% at 50% 105%, oklch(0.90 0.05 60 / 0.35), transparent 68%),
+    radial-gradient(50% 50% at 90% 30%, oklch(0.95 0.04 78 / 0.28), transparent 75%);
   --grain-blend: multiply;
-  --grain-opacity: 0.05;
+  --grain-opacity: 0.035;
 }
 
 /* Light-mode contrast lift — opacity-modulated muted text stays legible.
