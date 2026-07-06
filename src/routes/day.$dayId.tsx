@@ -5,6 +5,7 @@ import { FloatingNav } from "@/components/FloatingNav";
 import { ExerciseCard } from "@/components/ExerciseCard";
 import { RestTimer } from "@/components/RestTimer";
 import { useProgress } from "@/lib/progress";
+import { ReadingProgress } from "@/components/ReadingProgress";
 
 export const Route = createFileRoute("/day/$dayId")({
   loader: ({ params }): { day: TrainingDay } => {
@@ -47,6 +48,9 @@ function DayPage() {
     <div className="relative min-h-screen">
       <AmbientBackground />
       <FloatingNav />
+      <ReadingProgress />
+
+
 
       <main className="relative z-10 pt-32 pb-24 px-6">
         <div className="max-w-5xl mx-auto">
