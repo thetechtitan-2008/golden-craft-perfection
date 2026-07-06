@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { BackToTop } from "@/components/BackToTop";
+import { CustomCursor } from "@/components/CustomCursor";
 
 function NotFoundComponent() {
   return (
@@ -130,9 +133,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  // Boot theme early to avoid FOUC.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem("sr:theme");
+    const theme = stored === "light" ? "light" : "dark";
+    document.documentElement.classList.toggle("light", theme === "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollProgress />
+      <CustomCursor />
       <Outlet />
+      <BackToTop />
     </QueryClientProvider>
   );
 }
