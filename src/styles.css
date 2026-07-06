@@ -390,6 +390,16 @@
     radial-gradient(70% 50% at 50% 50%, color-mix(in oklch, var(--background) 60%, transparent), transparent 70%),
     linear-gradient(180deg, var(--background) 0%, color-mix(in oklch, var(--background) 92%, black) 100%);
   transition: background 0.6s ease;
+}
+.light .ambient-orbs {
+  background:
+    radial-gradient(60% 45% at 15% 5%, color-mix(in oklch, var(--gold-highlight) 22%, transparent), transparent 65%),
+    radial-gradient(55% 45% at 85% 95%, color-mix(in oklch, var(--gold) 12%, transparent), transparent 66%),
+    radial-gradient(80% 55% at 50% 50%, color-mix(in oklch, var(--background) 40%, white), transparent 72%),
+    linear-gradient(180deg, oklch(0.985 0.010 84) 0%, oklch(0.945 0.018 82) 100%);
+}
+
+
 
 
 
