@@ -321,18 +321,27 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
         <>
           <canvas ref={canvasRef} className="w-full h-full block" />
 
-          {/* Captions overlay */}
-          <div className="absolute inset-x-0 top-[16%] flex justify-center pointer-events-none px-6">
-            <div key={captionIndex} className="text-center animate-[captionIn_1.1s_cubic-bezier(0.19,1,0.22,1)_both]">
-              <div className="text-[10px] tracking-[0.55em] uppercase text-[#e8c96a]/80 mb-4">
-                {captions[captionIndex].pre}
+          {/* Captions — perfectly centered, majestic */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6">
+            <div
+              key={captionIndex}
+              className="text-center animate-[captionIn_1.4s_cubic-bezier(0.19,1,0.22,1)_both] max-w-4xl"
+            >
+              <div className="flex items-center justify-center gap-4 mb-6 opacity-90">
+                <span className="w-16 h-px bg-gradient-to-r from-transparent via-[#e8c96a]/70 to-transparent" />
+                <span className="text-[10px] tracking-[0.55em] uppercase text-[#e8c96a]/90">
+                  {captions[captionIndex].pre}
+                </span>
+                <span className="w-16 h-px bg-gradient-to-l from-transparent via-[#e8c96a]/70 to-transparent" />
               </div>
               <div
-                className="font-display italic text-transparent bg-clip-text"
+                className="font-display italic text-transparent bg-clip-text leading-[0.98]"
                 style={{
-                  backgroundImage: "linear-gradient(180deg,#fff2c2 0%,#e8c96a 45%,#8a6a2a 100%)",
-                  fontSize: "clamp(1.75rem, 4.5vw, 3.5rem)",
-                  letterSpacing: "0.005em",
+                  backgroundImage:
+                    "linear-gradient(180deg,#fff6d4 0%,#f2d47a 40%,#c99a3a 75%,#6a4a18 100%)",
+                  fontSize: "clamp(2.5rem, 7.5vw, 6rem)",
+                  letterSpacing: "-0.005em",
+                  textShadow: "0 0 60px rgba(212,175,55,0.35)",
                 }}
               >
                 {captions[captionIndex].main}
@@ -345,7 +354,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
               skipRef.current = true;
               stopAllIntro();
             }}
-            className="absolute bottom-8 right-8 text-[10px] tracking-[0.35em] uppercase text-[#e8c96a]/60 hover:text-[#e8c96a] transition-colors"
+            className="absolute bottom-8 right-8 text-[10px] tracking-[0.35em] uppercase text-[#e8c96a]/60 hover:text-[#e8c96a] transition-colors pointer-events-auto"
           >
             Skip
           </button>
@@ -355,6 +364,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
           </div>
         </>
       )}
+
 
       <style>{`
         @keyframes gateIn {

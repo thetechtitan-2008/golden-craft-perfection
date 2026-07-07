@@ -15,34 +15,43 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const [introDone, setIntroDone] = useState(false);
-  const [showIntroFor, setShowIntroFor] = useState(false);
+  // Synchronous initial state — no flash of home before the intro appears
+  const [introDone, setIntroDone] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("skp-intro-seen") === "1";
+  });
+  const [showIntro, setShowIntro] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("skp-intro-seen") !== "1";
+  });
 
   useEffect(() => {
-    // Only show intro once per session
-    if (typeof window === "undefined") return;
-    const seen = sessionStorage.getItem("skp-intro-seen");
-    if (!seen) {
-      setShowIntroFor(true);
-    } else {
-      setIntroDone(true);
+    if (showIntro) {
+      // Lock scroll while the intro plays
+      document.documentElement.style.overflow = "hidden";
+      return () => {
+        document.documentElement.style.overflow = "";
+      };
     }
-  }, []);
+  }, [showIntro]);
 
   const handleIntroDone = () => {
-    sessionStorage.setItem("skp-intro-seen", "1");
+    try { sessionStorage.setItem("skp-intro-seen", "1"); } catch { /* ignore */ }
     setIntroDone(true);
+    setShowIntro(false);
   };
 
   return (
     <div className="relative min-h-screen">
-      {showIntroFor && !introDone && <CinematicIntro onDone={handleIntroDone} />}
+      {showIntro && <CinematicIntro onDone={handleIntroDone} />}
+
 
       <AmbientBackground />
       <FloatingNav />
 
       <main className="relative z-10">
-        <Hero />
+        {!showIntro && <Hero />}
+
 
         {/* Protocol synthesis */}
         <section id="protocol" className="relative py-32 px-6">

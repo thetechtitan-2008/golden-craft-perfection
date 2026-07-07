@@ -10,10 +10,11 @@ const CATEGORY_LABEL: Record<Exercise["category"], string> = {
 };
 
 const CATEGORY_ACCENT: Record<Exercise["category"], string> = {
-  warmup: "oklch(0.75 0.14 90)",
+  warmup: "oklch(0.66 0.22 28)",
   main: "oklch(0.72 0.13 82)",
   cooldown: "oklch(0.62 0.08 200)",
 };
+
 
 function parseRestSeconds(rest: string): number | null {
   // pick the first number followed by 's' (or bare) in the rest string

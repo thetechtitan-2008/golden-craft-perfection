@@ -54,9 +54,11 @@ function DayInstrumentCard({ day, index }: { day: TrainingDay; index: number }) 
       params={{ dayId: day.id }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="group relative glass-panel rounded-2xl p-6 pt-7 min-h-[300px] flex flex-col overflow-hidden rise transition-transform duration-500 hover:-translate-y-1"
-      style={{ animationDelay: `${index * 80}ms` }}
+      data-reveal
+      data-reveal-delay={`${index * 90}ms`}
+      className="group relative glass-panel rounded-2xl p-6 pt-7 min-h-[300px] flex flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1"
     >
+
       {/* corner ornaments */}
       <CornerOrnaments />
 
