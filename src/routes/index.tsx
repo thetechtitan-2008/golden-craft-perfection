@@ -50,7 +50,8 @@ function Home() {
       <FloatingNav />
 
       <main className="relative z-10">
-        <Hero />
+        {!showIntro && <Hero />}
+
 
         {/* Protocol synthesis */}
         <section id="protocol" className="relative py-32 px-6">
