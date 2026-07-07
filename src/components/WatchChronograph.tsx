@@ -212,9 +212,12 @@ export function WatchChronograph() {
             ))}
           </g>
           {/* balance wheel oscillating */}
-          <g style={{ animation: "balance-osc 0.42s ease-in-out infinite", transformOrigin: "center", transformBox: "fill-box" }}>
-            <circle r="24" fill="none" stroke="url(#gold)" strokeWidth="0.5" opacity="0.4" />
-            <line x1="-24" y1="0" x2="24" y2="0" stroke="url(#gold)" strokeWidth="0.6" opacity="0.5" />
+          <g style={{ animation: "balance-osc 0.38s ease-in-out infinite", transformOrigin: "center", transformBox: "fill-box" }}>
+            <circle r="24" fill="none" stroke="url(#gold)" strokeWidth="0.5" opacity="0.5" />
+            <line x1="-24" y1="0" x2="24" y2="0" stroke="url(#gold)" strokeWidth="0.8" opacity="0.6" />
+            {/* Hairspring indicator */}
+            <circle r="10" fill="none" stroke="url(#gold)" strokeWidth="0.3" opacity="0.35" />
+            <circle r="14" fill="none" stroke="url(#gold)" strokeWidth="0.2" opacity="0.25" />
           </g>
           <text y="72" fontFamily="'Cinzel', serif" fontSize="6" fill="#d4af37" textAnchor="middle" opacity="0.6" letterSpacing="2">
             TOURBILLON
@@ -259,8 +262,10 @@ export function WatchChronograph() {
             );
           })}
           {/* rotor slowly rotating behind */}
-          <g style={{ animation: "rotor-spin 22s linear infinite", transformOrigin: "center", transformBox: "fill-box" }} opacity="0.35">
-            <path d="M -36 0 A 36 36 0 0 1 36 0 L 8 0 A 8 8 0 0 0 -8 0 Z" fill="url(#gold)" opacity="0.8" />
+          <g style={{ animation: "rotor-spin 18s linear infinite", transformOrigin: "center", transformBox: "fill-box" }} opacity="0.4">
+            <path d="M -36 0 A 36 36 0 0 1 36 0 L 8 0 A 8 8 0 0 0 -8 0 Z" fill="url(#gold)" opacity="0.85" />
+            {/* Rotor decorations */}
+            <circle r="6" fill="none" stroke="url(#gold)" strokeWidth="0.3" opacity="0.5" />
           </g>
           <text y="-52" fontFamily="'Cinzel', serif" fontSize="6" fill="#d4af37" textAnchor="middle" opacity="0.5" letterSpacing="2">
             ROTOR

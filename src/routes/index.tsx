@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { CinematicIntro } from "@/components/CinematicIntro";
-import { FloatingNav } from "@/components/FloatingNav";
+import { FloatingNav, EmblemMark } from "@/components/FloatingNav";
 import { Hero } from "@/components/Hero";
 import { WeeklyOverview } from "@/components/WeeklyOverview";
 import { WatchChronograph } from "@/components/WatchChronograph";
@@ -150,11 +150,60 @@ function Home() {
 
         <Analytics />
 
-        <footer className="relative py-16 px-6 border-t border-gold/10">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] tracking-[0.4em] uppercase text-foreground/40">
-            <span>Supreme Kinetic Protocol · Omega Edition</span>
-            <span>Forged in Discipline</span>
-            <span>MMXXVI</span>
+        {/* Premium footer */}
+        <footer className="relative py-20 px-6 border-t border-gold/10 overflow-hidden">
+          {/* Ambient glow */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-gradient-radial from-gold/8 via-gold/3 to-transparent" />
+          </div>
+
+          <div className="max-w-6xl mx-auto relative">
+            {/* Brand mark */}
+            <div className="flex flex-col items-center mb-12">
+              <div className="flex items-center gap-6">
+                <span className="w-20 h-px bg-gradient-to-r from-transparent to-gold-bright/50" />
+                <EmblemMark className="w-7 h-7 text-gold-bright eye-glow" />
+                <span className="w-20 h-px bg-gradient-to-l from-transparent to-gold-bright/50" />
+              </div>
+              <div className="mt-4 font-display text-[10px] tracking-[0.6em] uppercase text-gold-bright/70">
+                Supreme Kinetic Protocol
+              </div>
+            </div>
+
+            {/* Footer content */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              {/* Left: Edition */}
+              <div className="text-center md:text-left">
+                <div className="text-[10px] tracking-[0.4em] uppercase text-foreground/50">
+                  Omega Edition
+                </div>
+                <div className="mt-2 text-[9px] tracking-[0.25em] text-foreground/30">
+                  Biomechanical Masterclass
+                </div>
+              </div>
+
+              {/* Center: Motto */}
+              <div className="font-serif italic text-sm text-gold-bright/60 tracking-wide">
+                Forged in Discipline
+              </div>
+
+              {/* Right: Year */}
+              <div className="text-center md:text-right">
+                <div className="text-[10px] tracking-[0.4em] uppercase text-foreground/50">
+                  MMXXVI
+                </div>
+                <div className="mt-2 text-[9px] tracking-[0.25em] text-foreground/30">
+                  Absolute Synthesis
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom line */}
+            <div className="mt-12 pt-6 border-t border-gold/5 text-center">
+              <div className="text-[9px] tracking-[0.3em] uppercase text-foreground/25">
+                Six Days of Exposure · One Day of Restoration
+              </div>
+            </div>
           </div>
         </footer>
       </main>

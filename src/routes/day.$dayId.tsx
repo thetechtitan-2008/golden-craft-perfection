@@ -7,6 +7,14 @@ import { RestTimer } from "@/components/RestTimer";
 import { useProgress } from "@/lib/progress";
 import { ReadingProgress } from "@/components/ReadingProgress";
 
+const PHASE_ACCENT: Record<string, string> = {
+  Hypertrophy: "oklch(0.72 0.13 82)",
+  Kinetic: "oklch(0.78 0.15 70)",
+  Athletic: "oklch(0.82 0.15 60)",
+  Potentiation: "oklch(0.88 0.14 55)",
+  Recovery: "oklch(0.62 0.08 200)",
+};
+
 export const Route = createFileRoute("/day/$dayId")({
   loader: ({ params }): { day: TrainingDay } => {
     const day = getDay(params.dayId);
@@ -62,25 +70,47 @@ function DayPage() {
           </Link>
 
           <div className="text-center mb-16">
-            <div className="font-mono text-[10px] tracking-[0.5em] uppercase text-gold-bright/70 mb-6">
-              Day {day.index.toString().padStart(2, "0")} · {day.phase}
+            {/* Phase indicator with accent color */}
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
+              <span
+                className="text-[9px] tracking-[0.5em] uppercase font-mono px-3 py-1 rounded-sm border"
+                style={{
+                  color: PHASE_ACCENT[day.phase],
+                  borderColor: `color-mix(in oklch, ${PHASE_ACCENT[day.phase]} 40%, transparent)`,
+                }}
+              >
+                Day {day.index.toString().padStart(2, "0")} · {day.phase}
+              </span>
+              <span className="w-12 h-px bg-gradient-to-l from-transparent to-gold-bright/60" />
             </div>
+
             <h1 className="font-display text-4xl md:text-6xl gold-gradient-text leading-tight mb-4">
               {day.title}
             </h1>
             <p className="text-[11px] tracking-[0.35em] uppercase text-foreground/50">
               {day.subtitle}
             </p>
-            <div className="mt-8 max-w-3xl mx-auto glass-panel rounded-xl p-6">
-              <p className="font-serif italic text-base md:text-lg leading-relaxed text-foreground/80">
+
+            {/* Hero narrative panel */}
+            <div className="mt-8 max-w-3xl mx-auto glass-panel rounded-xl p-6 md:p-8 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-bright/30 to-transparent" />
+              <p className="font-serif italic text-base md:text-lg leading-[1.75] text-foreground/80">
                 {day.narrative}
               </p>
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-bright/20 to-transparent" />
             </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {/* Muscle group chips with exercise count */}
+            <div className="mt-6 flex flex-wrap justify-center items-center gap-2">
+              {total > 0 && (
+                <span className="text-[9px] tracking-[0.25em] uppercase text-gold-bright/60 mr-2">
+                  {total} {total === 1 ? 'exercise' : 'exercises'}
+                </span>
+              )}
               {day.muscleGroups.map((m) => (
                 <span
                   key={m}
-                  className="text-[9px] tracking-[0.3em] uppercase px-3 py-1 rounded-full border border-gold/25 text-foreground/70"
+                  className="text-[9px] tracking-[0.3em] uppercase px-3 py-1.5 rounded-full border border-gold/25 text-foreground/70 hover:border-gold/40 hover:text-foreground/90 transition-colors"
                 >
                   {m}
                 </span>
@@ -153,59 +183,97 @@ function DayPage() {
           })}
 
           {day.recovery && (
-            <div>
-              <div className="flex items-center gap-4 mb-6">
+            <div className="mb-12">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="gold-hairline flex-1" />
-                <h2 className="font-display text-lg text-gold-bright tracking-[0.15em]">
-                  Recovery · Hydration · Parasympathetic
-                </h2>
+                <div className="flex items-center gap-3">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 text-gold-bright/70" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                    <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <h2 className="font-display text-lg text-gold-bright tracking-[0.2em]">
+                    Recovery · Hydration · Parasympathetic
+                  </h2>
+                </div>
                 <div className="gold-hairline flex-1" />
               </div>
               <div className="space-y-4">
-                {day.recovery.map((r) => (
-                  <div key={r.name} className="glass-panel rounded-xl p-6">
-                    <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+                {day.recovery.map((r, idx) => (
+                  <div
+                    key={r.name}
+                    className="glass-panel rounded-xl p-6 relative overflow-hidden group hover:-translate-y-0.5 transition-transform duration-500"
+                    data-reveal
+                    data-reveal-delay={`${idx * 80}ms`}
+                  >
+                    {/* Recovery icon indicator */}
+                    <div className="absolute top-6 right-6 w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center">
+                      <span className="text-[10px] font-mono text-gold/60">
+                        {idx + 1}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4 pr-12">
                       <h3 className="font-display text-lg text-gold-bright">{r.name}</h3>
-                      <div className="flex gap-3 text-[10px] tracking-[0.3em] uppercase text-foreground/60">
-                        <span><span className="text-gold-bright/70">Volume</span> {r.volume}</span>
-                        <span><span className="text-gold-bright/70">Duration</span> {r.duration}</span>
+                      <div className="flex gap-4 text-[10px] tracking-[0.3em] uppercase text-foreground/60">
+                        <span>
+                          <span className="text-gold-bright/70 mr-1">Volume</span>
+                          {r.volume}
+                        </span>
+                        <span>
+                          <span className="text-gold-bright/70 mr-1">Duration</span>
+                          {r.duration}
+                        </span>
                       </div>
                     </div>
-                    <div className="text-sm text-foreground/80 mb-3">{r.execution}</div>
-                    <div className="gold-hairline my-3" />
-                    <p className="text-xs text-foreground/60 leading-relaxed">{r.reasoning}</p>
+
+                    <div className="text-sm text-foreground/80 mb-4 leading-relaxed">
+                      {r.execution}
+                    </div>
+
+                    <div className="gold-hairline my-4" />
+
+                    <p className="text-xs text-foreground/60 leading-relaxed italic">
+                      {r.reasoning}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
+          {/* Day navigation */}
           <div className="mt-20 flex items-center justify-between gap-4">
             {prevDay ? (
               <Link
                 to="/day/$dayId"
                 params={{ dayId: prevDay.id }}
-                className="glass-panel rounded-xl p-5 flex-1 max-w-xs group hover:-translate-y-0.5 transition-transform"
+                className="glass-panel rounded-xl p-5 flex-1 max-w-xs group hover:-translate-y-0.5 transition-all duration-500 hover:shadow-[0_20px_50px_-20px_rgba(212,175,55,0.25)]"
               >
-                <div className="text-[9px] tracking-[0.4em] uppercase text-foreground/50">
+                <div className="text-[9px] tracking-[0.4em] uppercase text-gold-bright/60 mb-2">
                   ← Previous
                 </div>
-                <div className="font-display text-sm text-gold-bright mt-2">
-                  Day {prevDay.index} · {prevDay.focus}
+                <div className="font-display text-base text-gold-bright">
+                  Day {prevDay.index}
+                </div>
+                <div className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mt-1">
+                  {prevDay.focus}
                 </div>
               </Link>
-            ) : <div />}
+            ) : <div className="flex-1 max-w-xs" />}
             {nextDay && (
               <Link
                 to="/day/$dayId"
                 params={{ dayId: nextDay.id }}
-                className="glass-panel rounded-xl p-5 flex-1 max-w-xs text-right group hover:-translate-y-0.5 transition-transform ml-auto"
+                className="glass-panel rounded-xl p-5 flex-1 max-w-xs text-right group hover:-translate-y-0.5 transition-all duration-500 hover:shadow-[0_20px_50px_-20px_rgba(212,175,55,0.25)] ml-auto"
               >
-                <div className="text-[9px] tracking-[0.4em] uppercase text-foreground/50">
+                <div className="text-[9px] tracking-[0.4em] uppercase text-gold-bright/60 mb-2">
                   Next →
                 </div>
-                <div className="font-display text-sm text-gold-bright mt-2">
-                  Day {nextDay.index} · {nextDay.focus}
+                <div className="font-display text-base text-gold-bright">
+                  Day {nextDay.index}
+                </div>
+                <div className="text-[10px] tracking-[0.25em] uppercase text-foreground/50 mt-1">
+                  {nextDay.focus}
                 </div>
               </Link>
             )}
