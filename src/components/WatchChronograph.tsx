@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { playClick, playHover, unlockAudio } from "@/lib/sound";
+
+
 
 /**
  * Ultra-high-end mechanical skeleton chronograph. SVG-based, GPU-accelerated
@@ -391,10 +394,15 @@ function Pusher({
   const [down, setDown] = useState(false);
   return (
     <button
-      onClick={onClick}
+      onClick={() => {
+        unlockAudio();
+        playClick(1.1);
+        onClick();
+      }}
       onPointerDown={() => setDown(true)}
       onPointerUp={() => setDown(false)}
       onPointerLeave={() => setDown(false)}
+      onMouseEnter={() => playHover()}
       className={`pusher-btn rounded-md min-w-[110px] px-6 py-3 text-[10px] tracking-[0.4em] uppercase transition-colors ${
         active ? "text-white" : "text-gold-bright"
       } ${down ? "pusher-btn-active" : ""}`}

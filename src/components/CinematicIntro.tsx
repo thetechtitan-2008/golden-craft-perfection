@@ -2,13 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { playIntroScore, stopAllIntro, unlockAudio, playClick } from "@/lib/sound";
 
 /**
- * Cinematic intro — three-act sequence with procedural orchestral score.
+ * Cinematic intro — a purely abstract cosmic overture. No logos, no crest,
+ * no animal, no symbol. Only golden particles, volumetric light, and
+ * flowing energy that dissolves seamlessly into the hero.
  *
- *   Act I  (0.0–3.5s)  Black. Typography: "In an age of average..."
- *   Act II (3.5–7.5s)  Particles converge into a golden eagle emblem.
- *   Act III(7.5–11s)   Wings spread, camera pushes through into the home page.
- *
- * A silent "Begin" gate appears first so audio can unlock on user gesture.
+ *   Act I  (0.0–3.2s)   Infinite darkness. Sparse golden dust drifting.
+ *   Act II (3.2–7.0s)   Camera pushes through cosmic space. Volumetric
+ *                       rays bloom. Billions of particles flow like
+ *                       intelligent energy in twin sinusoidal currents.
+ *   Act III(7.0–11s)    A wave of golden light sweeps the field. Particles
+ *                       accelerate outward — becoming the hero's atmosphere.
  */
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -41,13 +44,13 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     if (phase !== "active") return;
     const timers = [
-      setTimeout(() => setCaptionIndex(1), 3200),
-      setTimeout(() => setCaptionIndex(2), 6400),
+      setTimeout(() => setCaptionIndex(1), 3400),
+      setTimeout(() => setCaptionIndex(2), 6800),
     ];
     return () => timers.forEach(clearTimeout);
   }, [phase]);
 
-  // Canvas animation
+  // Canvas animation — abstract cosmic flow
   useEffect(() => {
     if (phase !== "active") return;
     const canvas = canvasRef.current;
@@ -55,7 +58,8 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.6);
     const resize = () => {
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
@@ -65,43 +69,38 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
     resize();
     window.addEventListener("resize", resize);
 
-    // Eagle silhouette targets — symmetric across x=0
-    const half = [
-      [0, -0.02], [0.02, 0.05], [0.03, 0.14], [0.02, 0.22], [0, 0.28],
-      [0, -0.08], [0.03, -0.09], [0.05, -0.075], [0.06, -0.06],
-      [0.05, -0.02], [0.09, 0], [0.14, 0.02], [0.20, 0.03], [0.26, 0.02],
-      [0.32, 0], [0.38, -0.03], [0.44, -0.07], [0.49, -0.11], [0.53, -0.15],
-      [0.48, -0.06], [0.42, 0.01], [0.36, 0.06], [0.30, 0.09], [0.24, 0.10],
-      [0.18, 0.10], [0.12, 0.09], [0.07, 0.08],
-      [0.55, -0.13], [0.51, -0.08], [0.47, -0.02],
-      [0.20, 0.06], [0.26, 0.06], [0.32, 0.04],
-      [0.02, 0.30], [0.04, 0.32], [0.06, 0.30],
-    ];
-    const targets: { x: number; y: number }[] = [];
-    const N = 1100;
+    // Two flowing rivers of particles crossing through cosmic space.
+    type Particle = {
+      x: number; y: number;
+      z: number;           // depth 0..1 (0 near, 1 far)
+      vx: number; vy: number;
+      seed: number;        // per-particle phase
+      band: number;        // 0 or 1 — which current
+      size: number;
+      hue: number;
+    };
+    const N = isMobile ? 900 : 1800;
+    const parts: Particle[] = [];
     for (let i = 0; i < N; i++) {
-      const seg = half[Math.floor(Math.random() * half.length)];
-      const jx = (Math.random() - 0.5) * 0.03;
-      const jy = (Math.random() - 0.5) * 0.03;
-      const side = Math.random() < 0.5 ? -1 : 1;
-      targets.push({ x: side * (seg[0] + jx), y: seg[1] + jy });
+      parts.push({
+        x: Math.random(),
+        y: Math.random(),
+        z: Math.random(),
+        vx: 0,
+        vy: 0,
+        seed: Math.random() * Math.PI * 2,
+        band: Math.random() < 0.5 ? 0 : 1,
+        size: 0.35 + Math.random() * 1.6,
+        hue: 40 + Math.random() * 14,
+      });
     }
 
-    type Particle = {
-      x: number; y: number; tx: number; ty: number;
-      vx: number; vy: number; size: number; hue: number; life: number;
-    };
-    const parts: Particle[] = targets.map((t) => {
-      const a = Math.random() * Math.PI * 2;
-      const r = 0.6 + Math.random() * 0.7;
-      return {
-        x: Math.cos(a) * r, y: Math.sin(a) * r + (Math.random() - 0.5) * 0.4,
-        tx: t.x, ty: t.y, vx: 0, vy: 0,
-        size: 0.6 + Math.random() * 1.6,
-        hue: 42 + Math.random() * 12,
-        life: Math.random(),
-      };
-    });
+    // Volumetric light rays — fixed angles, gently pulsing.
+    const rays = Array.from({ length: 7 }).map((_, i) => ({
+      angle: -35 + i * 12 + (Math.random() - 0.5) * 4,
+      offset: Math.random(),
+      width: 0.08 + Math.random() * 0.16,
+    }));
 
     const start = performance.now();
     const DURATION = 11000;
@@ -111,83 +110,134 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
       const t = skipRef.current ? DURATION : now - start;
       const p = Math.min(t / DURATION, 1);
       const W = canvas.width, H = canvas.height;
-      const cx = W / 2, cy = H / 2;
-      const scale = Math.min(W, H) * 0.85;
 
+      // Background — deepens then blooms
+      const bloom = Math.pow(Math.max(0, p - 0.25), 1.6);
+      const bg = ctx.createRadialGradient(W * 0.5, H * 0.55, 0, W * 0.5, H * 0.55, Math.max(W, H) * 0.7);
+      bg.addColorStop(0, `rgba(${18 + bloom * 40}, ${12 + bloom * 30}, ${4 + bloom * 8}, 1)`);
+      bg.addColorStop(0.55, `rgba(${8 + bloom * 14}, ${5 + bloom * 8}, ${2}, 1)`);
+      bg.addColorStop(1, "#020202");
       ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = "#040404";
+      ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
 
-      // Act I: 0–3.5s — sparse floating dust
-      // Act II: 3.5–7.5s — particles converge to eagle
-      // Act III: 7.5–11s — spread + push through
-      let assembly = 0, push = 0;
-      if (p < 0.32) assembly = 0;
-      else if (p < 0.7) assembly = easeOutCubic((p - 0.32) / 0.38);
-      else assembly = 1;
-      if (p > 0.82) push = (p - 0.82) / 0.18;
-
-      const glowStrength = Math.min(1, assembly + push * 3);
-      const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale);
-      rg.addColorStop(0, `rgba(212,175,55,${0.10 * glowStrength})`);
-      rg.addColorStop(0.4, `rgba(212,175,55,${0.05 * glowStrength})`);
-      rg.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = rg;
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.globalCompositeOperation = "lighter";
-
-      for (const pt of parts) {
-        const dx = pt.tx - pt.x;
-        const dy = pt.ty - pt.y;
-        const k = 0.015 + assembly * 0.10;
-        pt.vx = pt.vx * 0.86 + dx * k;
-        pt.vy = pt.vy * 0.86 + dy * k;
-        pt.x += pt.vx;
-        pt.y += pt.vy;
-
-        const spread = p > 0.7 ? Math.min(1, (p - 0.7) / 0.15) : 0;
-        const stretch = 1 + spread * 0.18;
-        const pushScale = 1 + push * 7;
-
-        const drawX = cx + pt.x * scale * stretch * pushScale;
-        const drawY = cy + pt.y * scale * pushScale +
-          Math.sin(now * 0.001 + pt.life * 6) * (1 - assembly) * 22;
-
-        const alpha = (0.30 + assembly * 0.60) * (1 - push * 0.9);
-        const size = pt.size * dpr * (1 + push * 3.5) * (0.6 + assembly * 1.6);
-
-        ctx.fillStyle = `hsla(${pt.hue}, 82%, ${58 + assembly * 22}%, ${alpha})`;
-        ctx.beginPath();
-        ctx.arc(drawX, drawY, size, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (assembly > 0.6 && Math.random() < 0.025) {
-          ctx.fillStyle = `hsla(50, 100%, 90%, ${0.85 * alpha})`;
+      // Volumetric god-rays (Act II onward)
+      const rayAlpha = Math.max(0, Math.min(1, (p - 0.2) / 0.35)) * (1 - Math.max(0, (p - 0.9) / 0.1));
+      if (rayAlpha > 0.01) {
+        ctx.globalCompositeOperation = "screen";
+        const cx = W * 0.5;
+        const cy = H * -0.15;
+        for (const r of rays) {
+          const pulse = 0.55 + 0.45 * Math.sin(now * 0.0008 + r.offset * 6.28);
+          const a = (r.angle * Math.PI) / 180;
+          const len = Math.hypot(W, H) * 1.2;
+          const nx = Math.cos(a + Math.PI / 2);
+          const ny = Math.sin(a + Math.PI / 2);
+          const half = W * r.width;
+          const x2 = cx + Math.cos(a) * len;
+          const y2 = cy + Math.sin(a) * len;
+          const grad = ctx.createLinearGradient(cx, cy, x2, y2);
+          grad.addColorStop(0, `rgba(255, 220, 130, ${0.22 * rayAlpha * pulse})`);
+          grad.addColorStop(0.5, `rgba(212, 175, 55, ${0.08 * rayAlpha * pulse})`);
+          grad.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = grad;
           ctx.beginPath();
-          ctx.arc(drawX, drawY, size * 1.8, 0, Math.PI * 2);
+          ctx.moveTo(cx + nx * half * 0.3, cy + ny * half * 0.3);
+          ctx.lineTo(cx - nx * half * 0.3, cy - ny * half * 0.3);
+          ctx.lineTo(x2 - nx * half, y2 - ny * half);
+          ctx.lineTo(x2 + nx * half, y2 + ny * half);
+          ctx.closePath();
           ctx.fill();
         }
       }
 
-      // Eye glow when nearly assembled
-      if (assembly > 0.7 && p < 0.92) {
-        const eyeI = Math.min(1, (assembly - 0.7) / 0.3) * (1 - push);
-        const eg = ctx.createRadialGradient(
-          cx + 0.045 * scale, cy - 0.07 * scale, 0,
-          cx + 0.045 * scale, cy - 0.07 * scale, 44 * dpr,
-        );
-        eg.addColorStop(0, `rgba(255,232,154,${0.95 * eyeI})`);
-        eg.addColorStop(1, "rgba(255,232,154,0)");
-        ctx.fillStyle = eg;
+      // Fog layer
+      const fogAlpha = 0.05 + 0.12 * Math.sin(now * 0.0003);
+      const fog = ctx.createRadialGradient(W * 0.5, H * 0.6, W * 0.1, W * 0.5, H * 0.6, W * 0.9);
+      fog.addColorStop(0, `rgba(120, 90, 40, ${fogAlpha * (0.4 + bloom)})`);
+      fog.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.globalCompositeOperation = "screen";
+      ctx.fillStyle = fog;
+      ctx.fillRect(0, 0, W, H);
+
+      // Camera-push scale (Act II/III)
+      const push = p < 0.7 ? 0 : (p - 0.7) / 0.3;
+      const cameraZ = 1 + Math.pow(push, 1.6) * 6;
+
+      // Particles — flow like intelligent energy in two crossing currents
+      ctx.globalCompositeOperation = "lighter";
+      const flowStrength = Math.max(0, Math.min(1, (p - 0.15) / 0.4));
+      const time = now * 0.0004;
+
+      for (const pt of parts) {
+        // Sinusoidal current — twin rivers cross the field
+        const bandY = pt.band === 0 ? 0.35 : 0.65;
+        const wave = Math.sin(pt.x * 6.28 * 1.5 + time * 2 + pt.seed) * 0.12;
+        const targetY = bandY + wave;
+        const dy = targetY - pt.y;
+        pt.vy = pt.vy * 0.92 + dy * 0.02 * flowStrength;
+        const dir = pt.band === 0 ? 1 : -1;
+        pt.vx = pt.vx * 0.94 + dir * (0.0006 + pt.z * 0.001) * flowStrength;
+
+        pt.x += pt.vx + (pt.band === 0 ? 0.0004 : -0.0004) * flowStrength;
+        pt.y += pt.vy;
+
+        // Wrap
+        if (pt.x > 1.05) pt.x = -0.05;
+        if (pt.x < -0.05) pt.x = 1.05;
+
+        // Camera zoom from center
+        const relX = pt.x - 0.5;
+        const relY = pt.y - 0.55;
+        const zx = relX * cameraZ + 0.5;
+        const zy = relY * cameraZ + 0.55;
+
+        // Cull offscreen
+        if (zx < -0.02 || zx > 1.02 || zy < -0.02 || zy > 1.02) continue;
+
+        const drawX = zx * W;
+        const drawY = zy * H;
+
+        const depthAlpha = 0.35 + (1 - pt.z) * 0.55;
+        const alpha =
+          depthAlpha *
+          (0.25 + flowStrength * 0.75) *
+          (1 - push * 0.6);
+        const size = pt.size * dpr * (0.5 + (1 - pt.z) * 1.6) * (1 + push * 2.2);
+
+        // Core
+        ctx.fillStyle = `hsla(${pt.hue}, 88%, ${62 + flowStrength * 18}%, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(drawX, drawY, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Occasional bright kernel
+        if ((1 - pt.z) > 0.75 && Math.random() < 0.02) {
+          ctx.fillStyle = `hsla(50, 100%, 92%, ${0.9 * alpha})`;
+          ctx.beginPath();
+          ctx.arc(drawX, drawY, size * 2.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Golden wave sweep at ~7s
+      if (p > 0.55 && p < 0.92) {
+        const w = (p - 0.55) / 0.37;
+        const waveY = H * (1.1 - w * 1.4);
+        const grad = ctx.createLinearGradient(0, waveY - H * 0.3, 0, waveY + H * 0.3);
+        grad.addColorStop(0, "rgba(0,0,0,0)");
+        grad.addColorStop(0.5, `rgba(255,220,120,${0.28 * Math.sin(w * Math.PI)})`);
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.globalCompositeOperation = "screen";
+        ctx.fillStyle = grad;
         ctx.fillRect(0, 0, W, H);
       }
 
-      // Final gold flash
+      // Final bloom / dissolve
       if (p > 0.9) {
         const flash = (p - 0.9) / 0.1;
         ctx.globalCompositeOperation = "source-over";
-        ctx.fillStyle = `rgba(255,232,154,${flash * 0.4})`;
+        ctx.fillStyle = `rgba(255,232,154,${flash * 0.28})`;
         ctx.fillRect(0, 0, W, H);
       }
 
@@ -196,7 +246,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
         setTimeout(() => {
           setPhase("done");
           onDone();
-        }, 700);
+        }, 900);
         return;
       }
       raf = requestAnimationFrame(draw);
@@ -215,7 +265,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-[#040404] transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[100] bg-[#020202] transition-opacity duration-[900ms] ${
         phase === "fading" ? "opacity-0" : "opacity-100"
       }`}
       aria-hidden={phase !== "gate"}
@@ -272,8 +322,8 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
           <canvas ref={canvasRef} className="w-full h-full block" />
 
           {/* Captions overlay */}
-          <div className="absolute inset-x-0 top-[14%] flex justify-center pointer-events-none px-6">
-            <div key={captionIndex} className="text-center animate-[captionIn_0.9s_cubic-bezier(0.19,1,0.22,1)_both]">
+          <div className="absolute inset-x-0 top-[16%] flex justify-center pointer-events-none px-6">
+            <div key={captionIndex} className="text-center animate-[captionIn_1.1s_cubic-bezier(0.19,1,0.22,1)_both]">
               <div className="text-[10px] tracking-[0.55em] uppercase text-[#e8c96a]/80 mb-4">
                 {captions[captionIndex].pre}
               </div>
@@ -312,14 +362,10 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes captionIn {
-          0% { opacity: 0; transform: translateY(18px); letter-spacing: 0.2em; }
-          100% { opacity: 1; transform: translateY(0); letter-spacing: 0.005em; }
+          0% { opacity: 0; transform: translateY(22px); letter-spacing: 0.2em; filter: blur(6px); }
+          100% { opacity: 1; transform: translateY(0); letter-spacing: 0.005em; filter: blur(0); }
         }
       `}</style>
     </div>
   );
-}
-
-function easeOutCubic(x: number) {
-  return 1 - Math.pow(1 - x, 3);
 }
