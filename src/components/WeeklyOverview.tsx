@@ -56,7 +56,7 @@ function DayInstrumentCard({ day, index }: { day: TrainingDay; index: number }) 
       onMouseLeave={() => setHover(false)}
       data-reveal
       data-reveal-delay={`${index * 90}ms`}
-      className="group relative glass-panel rounded-2xl p-6 pt-7 min-h-[300px] flex flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1"
+      className="group relative glass-panel rounded-2xl p-7 pt-8 min-h-[340px] flex flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1"
     >
 
       {/* corner ornaments */}
