@@ -150,7 +150,7 @@ export function ArchitectPortrait() {
           <div className="flex items-center gap-4 mb-6" data-reveal>
             <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
             <span className="text-[10px] tracking-[0.5em] uppercase text-gold-bright/70">
-              A Letter from the Architect
+              A Letter from Abhi
             </span>
           </div>
 
@@ -164,7 +164,7 @@ export function ArchitectPortrait() {
           </h2>
 
           <p
-            className="mt-8 text-foreground/80 leading-[1.9] text-lg"
+            className="mt-8 text-foreground/85 leading-[1.9] text-lg md:text-xl"
             data-reveal
             data-reveal-delay="240ms"
           >
@@ -180,15 +180,16 @@ export function ArchitectPortrait() {
             >
               I
             </span>
-            built this protocol for the man who refuses the average — who
-            treats his body as the finest instrument he will ever own.
-            Six days of considered exposure. One day of restoration. No
-            noise. No shortcuts. Only the quiet, mechanical certainty of
-            work done at the highest standard.
+            am Abhiram R Ajay — Abhi to those who train beside me. I built
+            this protocol for the man who refuses the average, who treats his
+            body as the finest instrument he will ever own. Six days of
+            considered exposure. One day of restoration. No noise. No
+            shortcuts. Only the quiet, mechanical certainty of work done at
+            the highest standard.
           </p>
 
           <p
-            className="mt-6 text-foreground/70 leading-[1.9]"
+            className="mt-6 text-foreground/75 leading-[1.9] text-base md:text-lg"
             data-reveal
             data-reveal-delay="320ms"
           >
@@ -207,7 +208,7 @@ export function ArchitectPortrait() {
                 color: "transparent",
               }}
             >
-              — The Architect
+              — Abhi
             </span>
             <span className="flex-1 h-px bg-gradient-to-r from-gold/40 to-transparent" />
           </div>
