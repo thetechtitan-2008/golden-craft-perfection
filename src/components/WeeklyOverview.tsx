@@ -56,7 +56,7 @@ function DayInstrumentCard({ day, index }: { day: TrainingDay; index: number }) 
       onMouseLeave={() => setHover(false)}
       data-reveal
       data-reveal-delay={`${index * 90}ms`}
-      className="group relative glass-panel rounded-2xl p-6 pt-7 min-h-[300px] flex flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1"
+      className="group relative glass-panel rounded-2xl p-7 pt-8 min-h-[340px] flex flex-col overflow-hidden transition-transform duration-500 hover:-translate-y-1"
     >
 
       {/* corner ornaments */}
@@ -79,10 +79,10 @@ function DayInstrumentCard({ day, index }: { day: TrainingDay; index: number }) 
         </span>
       </div>
 
-      <h3 className="font-display text-xl leading-tight text-gold-bright mb-2">
+      <h3 className="font-display text-2xl md:text-3xl leading-tight text-gold-bright mb-2">
         {day.title}
       </h3>
-      <p className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 mb-6">
+      <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-foreground/60 mb-6">
         {day.subtitle}
       </p>
 

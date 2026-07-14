@@ -99,16 +99,16 @@ export function ArchitectPortrait() {
             />
 
             {/* Signature plate */}
-            <div className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between">
-              <div>
+            <div className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between gap-4">
+              <div className="min-w-0">
                 <div className="text-[9px] tracking-[0.5em] uppercase text-gold-bright/80">
-                  The Architect
+                  Abhiram R Ajay
                 </div>
-                <div className="mt-1 font-serif italic text-white/90 text-sm">
+                <div className="mt-1 font-serif italic text-white/90 text-sm truncate">
                   Forged in Discipline
                 </div>
               </div>
-              <div className="text-right">
+              <div className="text-right shrink-0">
                 <div className="text-[9px] tracking-[0.4em] uppercase text-white/50">
                   Portrait
                 </div>
@@ -119,9 +119,9 @@ export function ArchitectPortrait() {
             </div>
           </div>
 
-          {/* Floating gold plate */}
+          {/* Floating gold plate — sits clearly BELOW the frame, never overlapping the signature */}
           <div
-            className="hidden md:block absolute -bottom-6 -right-6 px-6 py-4 border border-gold/30 backdrop-blur-md"
+            className="hidden md:flex items-center gap-4 mt-6 mx-auto w-fit px-6 py-3 border border-gold/30 backdrop-blur-md"
             data-reveal
             data-reveal-delay="260ms"
             style={{
@@ -130,11 +130,17 @@ export function ArchitectPortrait() {
               boxShadow: "0 20px 60px -20px rgba(212,175,55,0.35)",
             }}
           >
-            <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/70">
-              Custodian · Nº 001
+            <div>
+              <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/70">
+                Custodian · Nº 001
+              </div>
+              <div className="mt-1 font-display gold-gradient-text text-lg leading-none">
+                Omega Edition
+              </div>
             </div>
-            <div className="mt-1 font-display gold-gradient-text text-xl">
-              Omega Edition
+            <span className="w-px h-8 bg-gold/25" />
+            <div className="font-serif italic text-white/70 text-xs">
+              — Abhi
             </div>
           </div>
         </div>
@@ -144,7 +150,7 @@ export function ArchitectPortrait() {
           <div className="flex items-center gap-4 mb-6" data-reveal>
             <span className="w-12 h-px bg-gradient-to-r from-transparent to-gold-bright/60" />
             <span className="text-[10px] tracking-[0.5em] uppercase text-gold-bright/70">
-              A Letter from the Architect
+              A Letter from Abhi
             </span>
           </div>
 
@@ -158,7 +164,7 @@ export function ArchitectPortrait() {
           </h2>
 
           <p
-            className="mt-8 text-foreground/80 leading-[1.9] text-lg"
+            className="mt-8 text-foreground/85 leading-[1.9] text-lg md:text-xl"
             data-reveal
             data-reveal-delay="240ms"
           >
@@ -174,15 +180,16 @@ export function ArchitectPortrait() {
             >
               I
             </span>
-            built this protocol for the man who refuses the average — who
-            treats his body as the finest instrument he will ever own.
-            Six days of considered exposure. One day of restoration. No
-            noise. No shortcuts. Only the quiet, mechanical certainty of
-            work done at the highest standard.
+            am Abhiram R Ajay — Abhi to those who train beside me. I built
+            this protocol for the man who refuses the average, who treats his
+            body as the finest instrument he will ever own. Six days of
+            considered exposure. One day of restoration. No noise. No
+            shortcuts. Only the quiet, mechanical certainty of work done at
+            the highest standard.
           </p>
 
           <p
-            className="mt-6 text-foreground/70 leading-[1.9]"
+            className="mt-6 text-foreground/75 leading-[1.9] text-base md:text-lg"
             data-reveal
             data-reveal-delay="320ms"
           >
@@ -201,7 +208,7 @@ export function ArchitectPortrait() {
                 color: "transparent",
               }}
             >
-              — The Architect
+              — Abhi
             </span>
             <span className="flex-1 h-px bg-gradient-to-r from-gold/40 to-transparent" />
           </div>
