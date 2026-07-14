@@ -8,6 +8,7 @@ import { WeeklyOverview } from "@/components/WeeklyOverview";
 import { WatchChronograph } from "@/components/WatchChronograph";
 import { RestTimer } from "@/components/RestTimer";
 import { Analytics } from "@/components/Analytics";
+import { ArchitectPortrait } from "@/components/ArchitectPortrait";
 import { PROTOCOL_SYNTHESIS } from "@/data/protocol";
 
 export const Route = createFileRoute("/")({
