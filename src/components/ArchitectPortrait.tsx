@@ -99,16 +99,16 @@ export function ArchitectPortrait() {
             />
 
             {/* Signature plate */}
-            <div className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between">
-              <div>
+            <div className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between gap-4">
+              <div className="min-w-0">
                 <div className="text-[9px] tracking-[0.5em] uppercase text-gold-bright/80">
-                  The Architect
+                  Abhiram R Ajay
                 </div>
-                <div className="mt-1 font-serif italic text-white/90 text-sm">
+                <div className="mt-1 font-serif italic text-white/90 text-sm truncate">
                   Forged in Discipline
                 </div>
               </div>
-              <div className="text-right">
+              <div className="text-right shrink-0">
                 <div className="text-[9px] tracking-[0.4em] uppercase text-white/50">
                   Portrait
                 </div>
@@ -119,9 +119,9 @@ export function ArchitectPortrait() {
             </div>
           </div>
 
-          {/* Floating gold plate */}
+          {/* Floating gold plate — sits clearly BELOW the frame, never overlapping the signature */}
           <div
-            className="hidden md:block absolute -bottom-6 -right-6 px-6 py-4 border border-gold/30 backdrop-blur-md"
+            className="hidden md:flex items-center gap-4 mt-6 mx-auto w-fit px-6 py-3 border border-gold/30 backdrop-blur-md"
             data-reveal
             data-reveal-delay="260ms"
             style={{
@@ -130,11 +130,17 @@ export function ArchitectPortrait() {
               boxShadow: "0 20px 60px -20px rgba(212,175,55,0.35)",
             }}
           >
-            <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/70">
-              Custodian · Nº 001
+            <div>
+              <div className="text-[9px] tracking-[0.45em] uppercase text-gold-bright/70">
+                Custodian · Nº 001
+              </div>
+              <div className="mt-1 font-display gold-gradient-text text-lg leading-none">
+                Omega Edition
+              </div>
             </div>
-            <div className="mt-1 font-display gold-gradient-text text-xl">
-              Omega Edition
+            <span className="w-px h-8 bg-gold/25" />
+            <div className="font-serif italic text-white/70 text-xs">
+              — Abhi
             </div>
           </div>
         </div>
