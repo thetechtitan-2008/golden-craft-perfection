@@ -8,6 +8,7 @@ import { WeeklyOverview } from "@/components/WeeklyOverview";
 import { WatchChronograph } from "@/components/WatchChronograph";
 import { RestTimer } from "@/components/RestTimer";
 import { Analytics } from "@/components/Analytics";
+import { ArchitectPortrait } from "@/components/ArchitectPortrait";
 import { PROTOCOL_SYNTHESIS } from "@/data/protocol";
 
 export const Route = createFileRoute("/")({
@@ -96,8 +97,11 @@ function Home() {
 
         <WeeklyOverview />
 
+        <ArchitectPortrait />
+
         {/* Chronograph */}
         <section id="chronograph" className="relative py-32 px-6">
+
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="flex items-center gap-4 mb-6" data-reveal>

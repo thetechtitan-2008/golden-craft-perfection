@@ -1,0 +1,17 @@
+# Netlify configuration
+# This project is built with TanStack Start (Vite). The default Lovable
+# deploy target is Cloudflare Workers; on Netlify we build to a static
+# output and fall back to index.html for client routes.
+
+[build]
+  command = "bun run build"
+  publish = "dist/client"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback so deep-links like /day/1 don't 404 on refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
